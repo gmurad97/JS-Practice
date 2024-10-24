@@ -35,3 +35,6 @@ console.log(user.id); // undefined */
     console.log(useridx); // without idx
 }
  */
+
+/* const x = "Murad";
+console.log(x.valueOf()) */
