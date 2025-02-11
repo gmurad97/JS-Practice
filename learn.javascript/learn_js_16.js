@@ -342,80 +342,98 @@ console.log(flattenArray([1, [2, [3, 4], 5], 6])); */
 // );
 // // Результат: [ {id: 1, name: "Alice"}, {id: 2, name: "Bob"} ]
 //==================================================
-/**
- * 
- * @param {Array} arr 
- * @param {*} fn 
- * @returns 
- */
-function uniqueBy(arr, fn) {
-    return arr.entries(fn);
+/* function uniqueBy(arr, fn) {
+    const unique_list = new Set();
+    return arr.filter((item)=>{
+        const key = fn(item);
+        if(unique_list.has(key))
+            return false;
+        unique_list.add(key);
+        return true;
+    });
 }
-console.log(uniqueBy([{ id: 1, name: "Alice" }, { id: 2, name: "Bob" }, { id: 1, name: "Alice" }], item => item.id));
-
-
-
-
-
-
-
-
-
-
-
+console.log(uniqueBy([{ id: 1, name: "Alice" }, { id: 2, name: "Bob" }, { id: 1, name: "Alice" }], item => item.id)); */
 
 // Задача 18. Группировка элементов
 // Описание:
 // Напиши функцию groupBy(arr, fn), которая группирует элементы массива по ключу, возвращаемому функцией fn. Результатом должна быть объект, где ключи – это значения, возвращённые fn, а значения – массивы элементов, для которых функция вернула этот ключ.
-
 // Пример:
-
-// js
-// Копировать
-// Редактировать
 // groupBy(["one", "two", "three", "four"], word => word.length);
 // // Результат: { 3: ["one", "two"], 5: ["three"], 4: ["four"] }
-// Задача 6. Сумма элементов матрицы
+//==================================================
+/* function groupBy(arr, fn) {
+    return arr.reduce((acc, curr) => {
+        const key = fn(curr);
+        if (!acc[key]) {
+            acc[key] = [];
+        }
+        acc[key].push(curr);
+        return acc;
+    }, {});
+}
+console.log(groupBy(["one", "two", "three", "four"], (word) => word.length)); */
+
+// Задача 19. Сумма элементов матрицы
 // Описание:
 // Напиши функцию sumMatrix(matrix), которая принимает двумерный массив чисел (матрицу) и возвращает сумму всех чисел в ней. При решении используй метод reduce.
-
 // Пример:
-
-// js
-// Копировать
-// Редактировать
 // sumMatrix([[1, 2, 3], [4, 5, 6]]);
 // // Результат: 21
-// Задача 7. Поиск максимального числа
+//==================================================
+// function sumMatrix(matrix) {
+//     return matrix.reduce((acc, curr) => {
+//         acc += curr.reduce((acc2, curr2) => acc2 + curr2, 0);
+//         return acc;
+//     }, 0);
+// }
+// console.log(sumMatrix([[1, 2, 3], [4, 5, 6]]));
+
+// Задача 20. Поиск максимального числа
 // Описание:
 // Напиши функцию findMax(arr), которая с помощью метода reduce находит максимальное число в массиве чисел.
-
 // Пример:
-
-// js
-// Копировать
-// Редактировать
 // findMax([5, 3, 8, 1]);
 // // Результат: 8
-// Задача 8. Разница между массивами
+//==================================================
+/* function findMax(arr){
+    return arr.reduce((acc,curr)=>{
+        if(acc < curr){
+            acc = curr;
+        }
+        return acc;
+    },-Infinity);
+}
+console.log(findMax([5, 3, 8, 1])); */
+
+// Задача 21. Разница между массивами
 // Описание:
 // Напиши функцию difference(arr1, arr2), которая возвращает новый массив, содержащий те элементы, которые присутствуют в первом массиве, но отсутствуют во втором. Используй стандартные методы массивов.
-
 // Пример:
-
-// js
-// Копировать
-// Редактировать
 // difference([1, 2, 3, 4], [2, 4]);
 // // Результат: [1, 3]
-// Задача 9 (Бонус). Сплющенный уникальный массив
+//==================================================
+/* function difference(arr1, arr2) {
+    return arr1.filter((item) => !arr2.includes(item));
+}
+console.log(difference([1, 2, 3, 4], [2, 4])); */
+
+// Задача 22 (Бонус). Сплющенный уникальный массив
 // Описание:
 // Напиши функцию flattenAndUnique(arr), которая сначала «сплющивает» вложенный массив (аналогично задаче 3), а затем возвращает новый массив, содержащий только уникальные значения.
-
 // Пример:
-
-// js
-// Копировать
-// Редактировать
 // flattenAndUnique([1, [2, 3, [2, 4]], 3, 5]);
 // // Результат: [1, 2, 3, 4, 5]
+//==================================================
+/* function flattenAndUnique(arr){
+    const flatten_list = [];
+    arr.forEach((item) => {
+        if (Array.isArray(item)) {
+            flatten_list.push(...flattenAndUnique(item));
+        }
+        else {
+            flatten_list.push(item);
+        }
+    });
+    return [...new Set(flatten_list)];
+}
+console.log(flattenAndUnique([1, [2, 3, [2, 4]], 3, 5])); */
