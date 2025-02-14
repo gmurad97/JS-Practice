@@ -87,5 +87,15 @@ console.log(curriedMultiply(7, 2, 3, 1)(1)()); */
 } */
 
 // Создай функцию curriedConcat для объединения строк, которая будет каррировать строку, принимая поочередно части строки, например: curriedConcat('Hello')(' ')('World') — должен вернуть "Hello World".
+/* const curriedConcat = (str) => (next) => next !== undefined ? curriedConcat(str + next) : str;
+console.log(curriedConcat('Hello')(' ')('World')()); */
 
 // Реализуй каррированную версию функции logMessage, которая будет логировать сообщение с временной меткой и уровнем важности (например, DEBUG, ERROR). Пример: logMessage(new Date())('INFO')('Server started').
+/* const logMessage = (date) => {
+    return (type) =>{
+        return (message) => {
+            return `[${date}]${type} - ${message}`;
+        }
+    }
+}
+console.log(logMessage(new Date())('INFO')('Server started')); */
