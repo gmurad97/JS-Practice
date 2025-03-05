@@ -40,3 +40,14 @@ console.log(6);
 setTimeout(() => console.log(7), 0); */
 
 // 1 6 3 5 2 4 7
+
+//################################################
+
+// const add = (...nums) => {
+//     return (...moreNums) => moreNums.length ? add(...nums, ...moreNums) : nums.reduce((acc,num) => acc + num, 0);
+// }
+
+
+// console.log(add(1)(2)(3)());
+// console.log(add(1)(2)());
+// console.log(add(1)());
