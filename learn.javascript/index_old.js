@@ -1,23 +1,30 @@
-function sum(a) {
+// function sum(a) {
+//     let currentSum = a;
 
-    let currentSum = a;
+//     function f(b) {
+//         currentSum += b;
+//         return f;
+//     }
 
-    function f(b) {
-        currentSum += b;
-        return f;
-    }
+//     f.toString = function () {
+//         return currentSum;
+//     }
 
-    f.toString = function () {
-        return currentSum;
-    };
+//     return f;
+// }
 
-    return f;
-}
+// const sum = (...args) =>{
+//     return (...moreArgs) => {
+//         if (moreArgs.length === 0)
+//             return args.reduce((acc,num) => acc+num, 0);
+//         return sum(...args, ...moreArgs);
+//     };
+// }
 
-alert(sum(1)(2)); // 3
-alert(sum(5)(-1)(2)); // 6
-alert(sum(6)(-1)(-2)(-3)); // 0
-alert(sum(0)(1)(2)(3)(4)(5)); // 15
+// console.log(sum(1)(2)); // 3
+// console.log(sum(5)(-1)(2)); // 6
+// console.log(sum(6)(-1)(-2)(-3)); // 0
+// console.log(sum(0)(1)(2)(3)(4)(5)); // 15
 
 
 
@@ -110,3 +117,37 @@ setTimeout(() => console.log(7), 0); */
 // console.log(add(1)(2)(3)());
 // console.log(add(1)(2)());
 // console.log(add(1)());
+
+// function log(...args){
+//     console.log(args[0], args[1]);
+// }
+
+// //limit closures
+// const closure = (callback) => {
+//     let limit = 3;
+
+//     return {
+//         resetLimit: function(){
+//             limit = 3;
+//         },
+//         call: function(...args){
+//             if(limit > 0){
+//                 limit--;
+//                 callback(...args);
+//             }
+//             else{
+//                 console.log("Превышен лимит выполнения!");
+//             }
+//         }
+//     }
+// }
+
+// const limitedLog = closure(log);
+
+// limitedLog.call("Hello", "World"); // Выведет: Hello World
+// limitedLog.call("Test", 123);      // Выведет: Test 123
+// limitedLog.call("Another", "call"); // Выведет: Another call
+// limitedLog.call("Should", "Fail");  // Выведет: Превышен лимит вызовов!
+
+// limitedLog.resetLimit();  // Сброс лимита
+// limitedLog.call("Works", "Again"); // Выведет: Works Again
