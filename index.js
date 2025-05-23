@@ -1,59 +1,99 @@
 // =============================================================================
+// Дебаунс (Debounce)
 
-const obj = { name: "Мурад", age: 24 };
+// Simple debounce
+// function debounce(fn, delay) {
+// 	let timer;
+// 	return function (value) {
+// 		clearTimeout(timer);
+// 		timer = setTimeout(() => fn.call(this, value), delay);
+// 	};
+// }
 
-// с "avoid"
-const f = (x) => x + 1;
+// const log = (message) => {
+// 	console.log(`Search: ${message}`);
+// };
 
+// const onSearch = debounce(log, 512);
+// onSearch("N");
+// onSearch("Na");
+// onSearch("Nam");
+// onSearch("Name");
+
+// AbortController Debounce
+// function fetchDebounce(fn, delay) {
+// 	let timer;
+// 	let controller;
+
+// 	return function (...args) {
+// 		clearTimeout(timer);
+// 		if (controller) controller.abort();
+// 		controller = new AbortController();
+// 		const acSignal = controller.signal;
+// 		timer = setTimeout(() => fn.call(this, ...args, acSignal), delay);
+// 		console.log("Timeout Update");
+// 	};
+// }
+
+// const search = async (query, signal) => {
+// 	const res = await fetch(
+// 		`https://jsonplaceholder.typicode.com/posts?q=${query}`,
+// 		{ signal });
+// 	const data = await res.json();
+// 	console.log(data);
+// };
+
+// const onSearch = fetchDebounce(search, 512);
+// onSearch("N");
+// onSearch("Na");
+// onSearch("Nam");
+// onSearch("id minus libero illum nam ad officiis");
+// =============================================================================
 // Батчинг (Batching)
-const createBatchProcessor = (callback, interval) => {
-	let queue = [];
-	let timer = null;
 
-	return (item) => {
-		queue.push(item);
-		if (!timer) {
-			timer = setTimeout(() => {
-				callback(queue);
-				queue = [];
-				timer = null;
-			}, interval);
-		}
-	};
-};
+// const createBatchProcessor = (fn, timeout) => {
+// 	let queue = [];
+// 	let timer = null;
 
-const logBatch = createBatchProcessor(console.log, 512);
-console.time("time_batching");
-console.log(logBatch("🦊"));
-console.log(logBatch("🐱"));
-console.log(logBatch("🐶"));
-console.timeEnd("time_batching");
+// 	return function (value) {
+// 		queue.push(value);
+// 		if (!timer) {
+// 			timer = setTimeout(() => {
+// 				fn(queue);
+// 				queue = [];
+// 				timer = null;
+// 			}, timeout);
+// 		}
+// 	};
+// };
 
+// const log = (messages) => {
+// 	console.log(`${messages.join(" ")}`);
+// };
+
+// const logBatch = createBatchProcessor(log, 512);
+// logBatch("🦊");
+// logBatch("🐱");
+// logBatch("🐶");
 // =============================================================================
-//Дебаунс (Debounce)
-function debounce(fn, delay = 500) {
-	let timer;
-	return function (...args) {
-		clearTimeout(timer);
-		timer = setTimeout(() => fn.apply(this, args), delay);
-	};
-}
+// Троттлинг (Throttling)
+// function throttle(fn, delay) {
+// 	let lastCall = 0;
+// 	return function (...args) {
+// 		const now = Date.now();
+// 		if (now - lastCall >= delay) {
+// 			lastCall = now;
+// 			fn.apply(this, args);
+// 		}
+// 	};
+// }
 
-// Пример:
-const onSearch = debounce((value) => console.log("Search:", value), 500);
-// =============================================================================
-//Троттлинг (Throttling)
+// const log = (value) => {
+// 	console.log(value);
+// };
 
-function throttle(fn, delay = 500) {
-	let lastCall = 0;
-	return function (...args) {
-		const now = Date.now();
-		if (now - lastCall >= delay) {
-			lastCall = now;
-			fn.apply(this, args);
-		}
-	};
-}
+// const onSubmit = throttle(log, 512);
 
-// Пример:
-const onScroll = throttle(() => console.log("Scroll event!"), 1000);
+
+// let count = 1;
+// setInterval(() => onSubmit("🦊".repeat(count++)), 128);
