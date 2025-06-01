@@ -103,4 +103,27 @@
 // }
 // console.log(fibonachi(8));
 // =============================================================================
-
+// const testArray = [5, -3, 0, 8, -1, 5, 2, -8, 4, 7, -2, 0, 6, -5, 3];
+// function quickSort(array) {
+//     if (array.length <= 1) {
+//         return array;
+//     }
+//     const pivotIndex = Math.floor(array.length / 2);
+//     const pivot = array[pivotIndex];
+//     const less = [];
+//     const greater = [];
+//     for (let x = 0; x < array.length; x++) {
+//         if (x === pivotIndex) {
+//             continue;
+//         }
+//         if (array[x] < pivot) {
+//             less.push(array[x]);
+//         }
+//         else {
+//             greater.push(array[x]);
+//         }
+//     }
+//     return [...quickSort(less), pivot, ...quickSort(greater)];
+// }
+// console.log(quickSort(testArray));
+// =============================================================================
